@@ -1,10 +1,12 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef   } from '@angular/core';
+import { PersonFormComponent } from './../person/person-form';
+import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { PersonTypeService } from './../util/person-type.service';
 import { LegalPersonComponent } from '../legal-person/legal-person.component';
 import { Person } from './../person/person.model';
 import { PersonService } from '../person/person.service';
+import { PersonDirective } from './../person/person.directive';
 
 @Component({
   selector: 'app-form-component',
@@ -12,6 +14,9 @@ import { PersonService } from '../person/person.service';
   styleUrls: ['./form-component.component.css']
 })
 export class FormComponentComponent implements OnInit {
+
+  @ViewChild(PersonDirective) personForm: PersonDirective;
+
   person: Person = new Person();
   name: string;
 
@@ -24,24 +29,25 @@ export class FormComponentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-//    const factory = this.componentFactoryResolver.resolveComponentFactory(LegalPersonComponent);
-//    const ref = this.viewContainerRef.createComponent(factory);
-//    ref.changeDetectorRef.detectChanges();
   }
 
   findPerson() {
     this.personService.get(this.name).subscribe(
       ( person: Person ) => {
         this.person = person;
-        this.loadForm();
+        if ( this.person ) {
+          this.loadForm();
+        }
       });
   }
 
   private loadForm() {
     const factory = this.componentFactoryResolver.resolveComponentFactory(this.personTypeService.get(this.person.type).component);
-    this.viewContainerRef.clear();
-    const ref = this.viewContainerRef.createComponent(factory);
-    // ref.changeDetectorRef.detectChanges();
-}
+    const viewContainerRef = this.personForm.viewContainerRef;
+    viewContainerRef.clear();
+
+    const componentRef = viewContainerRef.createComponent(factory);
+    (<PersonFormComponent>componentRef.instance).person = this.person;
+  }
 
 }

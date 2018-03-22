@@ -30,11 +30,8 @@
           <div class="form-row">
             <div class="col-lg-11 col-mg-12">
                 <label for="validationCustom01">First name</label>
-                <input type="text" class="form-control" id="validationCustom01" placeholder="First name" required
+                <input type="text" class="form-control" id="validationCustom01" placeholder="First name"
                 [(ngModel)]="name" name="name">
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
             </div>
             <div class="col-lg-1 col-md-12">
               <div class="h-100 w-100">
@@ -46,7 +43,7 @@
       </div>
       <hr size="30">
       <div>
-        <app-person></app-person>
+          <ng-template appPerson></ng-template>
       </div>
     </div>
 </div>
