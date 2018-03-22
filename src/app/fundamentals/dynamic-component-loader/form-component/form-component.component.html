@@ -1,0 +1,52 @@
+<div class="container card-container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-target="#collapse1">
+            <h3 class="panel-title">
+                Dynamic Component Loader
+            </h3>
+          </div>
+          <div id="collapse1" class="collapse in">
+            <div class="panel-body">
+              <blockquote>
+                <p>This example shows you how to use ComponentFactoryResolver to add components dynamically at runtime.</p>
+              </blockquote>
+            </div>
+          </div>
+          <hr size="30">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Clients</h4>
+      </div>
+      <div class="panel-body">
+        <p><strong>Customer Search</strong></p>
+
+        <form class="needs-validation" novalidate (ngSubmit)="findPerson()">
+          <div class="form-row">
+            <div class="col-lg-11 col-mg-12">
+                <label for="validationCustom01">First name</label>
+                <input type="text" class="form-control" id="validationCustom01" placeholder="First name" required
+                [(ngModel)]="name" name="name">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-lg-1 col-md-12">
+              <div class="h-100 w-100">
+                <button class="btn btn-success btn-search-inline" type="submit">Search</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <hr size="30">
+      <div>
+        <app-person></app-person>
+      </div>
+    </div>
+</div>
